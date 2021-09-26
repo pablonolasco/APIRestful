@@ -3,8 +3,10 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use App\Product;
+use App\Category;
 
-class CreateTransactionsTable extends Migration
+class CategoryProductTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +15,11 @@ class CreateTransactionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('transactions', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedBigInteger('quantity');
-            $table->unsignedBigInteger('buyer_id');
+        Schema::create('category_product', function (Blueprint $table) {
+            $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('product_id');
-            $table->timestamps();
 
-            $table->foreign('buyer_id')->references('id')->on('users');
+            $table->foreign('category_id')->references('id')->on('categories');
             $table->foreign('product_id')->references('id')->on('products');
         });
     }
@@ -32,6 +31,6 @@ class CreateTransactionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('transactions');
+        Schema::dropIfExists('category_product');
     }
 }

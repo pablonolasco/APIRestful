@@ -1,0 +1,4 @@
+php artisan make:model Product -mf
+
+-- --create=category_product nombre de los modelos a utilizar por orden alfabetico
+php artisan make:migration category_product_table --create=category_product

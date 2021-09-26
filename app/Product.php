@@ -40,7 +40,7 @@ class Product extends Model
     }
 
     /**
-     * un producto possee muchas transacciones
+     * TODO un producto possee muchas transacciones
      */
     public function transactions()
     {
