@@ -2,3 +2,18 @@ php artisan make:model Product -mf
 
 -- --create=category_product nombre de los modelos a utilizar por orden alfabetico
 php artisan make:migration category_product_table --create=category_product
+
+--factorias
+
+== conocer los comandos de artisan
+php artisan
+
+== comando de migracion
+  migrate:install      Create the migration repository
+  migrate:refresh      Reset and re-run all migrations refresca la base de datos y el rollback
+  migrate:reset        Rollback all database migrations -- borra las migraciones
+  migrate:rollback     Rollback the last database migration -- regresa a la version anterior
+  migrate:status       Show the status of each migration
+php artisan migrate:refresh --seed
+== ejecutar seed
+  db:seed              Seed the database with records

@@ -20,7 +20,7 @@ class Transaction extends Model
      */
     public function buyer()
     {
-        $this->belongsTo(Buyer::class);
+        return $this->belongsTo(Buyer::class);
     }
 
     /**
@@ -28,6 +28,6 @@ class Transaction extends Model
      */
     public function product()
     {
-        $this->belongsTo(Product::class);
+        return $this->belongsTo(Product::class);
     }
 }
