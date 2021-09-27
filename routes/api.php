@@ -37,4 +37,4 @@ Route::resource('sellers','Sellers\SellerController',['only'=>['index','show']])
 /**
  * Users
  */
-Route::resource('users','Users\UserController',['except'=>'create','edit']);
+Route::resource('users','Users\UserController',['except'=>['create','edit']]);
