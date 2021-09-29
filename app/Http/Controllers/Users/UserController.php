@@ -70,7 +70,7 @@ class UserController extends Controller
     {
         $usuario=User::findOrFail($id);
         $rules=[
-            'email'=>'email|unique:users,email,'.$usuario->id,
+            'email'=>'email|unique:users,email,'.$usuario->id,// obtiene el id de la persona para verificar que sea diferente el email
             'password'=>'min:6|confirmed',
             'admin'=>'in:'.User::USUARIO_ADMINISTRADOR.','.User::USUARIO_REGULAR
         ];
@@ -97,6 +97,7 @@ class UserController extends Controller
             }
         }
 
+        // verifica que la informacion sea distinta a la existente en la base de datos
         if (!$usuario->isDirty()){
             return response()->json(['error'=>'Se debe de ingresar un dato diferente para actualizar','code'=>422],422);
         }
