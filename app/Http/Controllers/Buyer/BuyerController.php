@@ -10,7 +10,7 @@ class BuyerController extends Controller
 {
     /**
      * @return \Illuminate\Http\JsonResponse
-     *  TODO lista de usuarios
+     *  TODO lista de compradores
      */
     public function index()
     {
@@ -18,6 +18,7 @@ class BuyerController extends Controller
         $compradores=Buyer::has('transactions')->get();
         return response()->json(['data'=>$compradores],200);
     }
+
     /**
      * Display the specified resource.
      *
