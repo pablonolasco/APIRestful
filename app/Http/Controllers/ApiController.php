@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Traits\ApiResponser;
 use Illuminate\Http\Request;
 
-class ExampleController extends Controller
+class ApiController extends Controller
 {
+    use ApiResponser;
+
     /**
      * Display a listing of the resource.
      *

@@ -40,6 +40,31 @@ class User extends Authenticatable
     ];
 
     /**
+     * @param $valor
+     * un mutador se utiliza para modificar el dato antes de insertarse en la base de datos
+     * antes de insertar el dato lo hace en minuscula
+     */
+    public function setNameAttribute($valor)
+    {
+        $this->attributes['name'] =strtolower($valor);
+    }
+
+    /**
+     * @param $valor
+     * @return string el valor de la primera letra de cada palabra en mayuscula
+     * un accesor se utiliza para modificar el valor despues de obtenerlo de la base de datos
+     */
+    public function getNameAttribute($valor)
+    {
+        return ucwords($valor);
+    }
+
+    public function setEmailAttribute($valor)
+    {
+        $this->attributes['email']=strtolower($valor);
+    }
+
+    /**
      * @return bool validad si el usuario es el administrador
      */
     public function esAdmin(){
