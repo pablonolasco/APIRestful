@@ -25,6 +25,8 @@ class Product extends Model
         'seller_id'
     ];
 
+    // TODO oculta la tabla pivote de los resultados
+    protected $hidden=['pivot'];
     /**
      * @return bool retorna el estatus del producto
      */
