@@ -4,8 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Product;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 class Category extends Model
 {
+    use SoftDeletes;
+    protected $dates=['deleted_at'];
     // asignacion masiva fillable
     protected $fillable=['name','description'];
 

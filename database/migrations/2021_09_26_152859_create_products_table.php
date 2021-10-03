@@ -23,6 +23,7 @@ class CreateProductsTable extends Migration
             $table->string('image');
             $table->integer('seller_id')->unsigned();
             $table->timestamps();
+            $table->softDeletes();
            // $table->foreign('seller_id')->references('id')->on('users')->onDelete('set null');
             $table->foreign('seller_id')->references('id')->on('users');
 

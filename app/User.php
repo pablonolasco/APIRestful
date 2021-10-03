@@ -2,12 +2,13 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, SoftDeletes;// se indica que se va colocar el sofdelete
     const USUARIO_VERIFICADO='1';
     const USUARIO_NO_VERIFICADO='0';
 
@@ -15,6 +16,7 @@ class User extends Authenticatable
     const USUARIO_REGULAR='false';
 
     protected $table='users';
+    protected $dates=['deleted_at'];// este campo sera tratato como una fecha
     /**
      * The attributes that are mass assignable.
      *
