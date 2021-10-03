@@ -25,11 +25,11 @@ Route::resource('categories','Categories\CategoryController',['except'=>['create
 /**
  * Products
  */
-Route::resource('Products','Products\ProductController',['only'=>['index','show']]);
+Route::resource('products','Products\ProductController',['only'=>['index','show']]);
 /**
  * Transactions
  */
-Route::resource('Transactions','Transactions\TransactionController',['only'=>['index','show']]);
+Route::resource('transactions','Transactions\TransactionController',['only'=>['index','show']]);
 /**
  * Sellers
  */
