@@ -17,3 +17,6 @@ php artisan
 php artisan migrate:refresh --seed
 == ejecutar seed
   db:seed              Seed the database with records
+
+== se crea el controlador con los metodos de recurso y se inyecta el modelo
+php artisan make:controller Categories/CategoryController -r -m Category
