@@ -21,15 +21,13 @@ class SellerController extends ApiController
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param int $id
+     * @param Seller $seller inyecion de dependencia implicita
      * @return \Illuminate\Http\JsonResponse
      */
-    public function show($id)
+    public function show(Seller $seller)
     {
-        $vendedor=Seller::has('products')->findOrFail($id);
+       // $vendedor=Seller::has('products')->findOrFail($id);
         //return response()->json(['data'=>$vendedor],200);
-        return $this->showOne($vendedor,200);
+        return $this->showOne($seller,200);
     }
 }

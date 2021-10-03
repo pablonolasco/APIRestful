@@ -21,16 +21,14 @@ class BuyerController extends ApiController
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param int $id
+     * @param Buyer $buyer inyeccion de dependecia implicita
      * @return \Illuminate\Http\JsonResponse
      */
-    public function show($id)
+    public function show(Buyer $buyer)
     {
-        $comprador=Buyer::has('transactions')->findOrFail($id);
+        //$comprador=Buyer::has('transactions')->findOrFail($id);
         //return response()->json(['data'=>$comprador],200);
-        return  $this->showOne($comprador,200);
+        return  $this->showOne($buyer,200);
 
     }
 }

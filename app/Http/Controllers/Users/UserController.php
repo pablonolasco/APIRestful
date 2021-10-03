@@ -48,15 +48,13 @@ class UserController extends ApiController
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\JsonResponse
+     * @param User $user se realiza una inyecion del modelo implicita
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        $usuario = User::findOrFail($id);
-        return $this->showOne($usuario, 200);
+        //$usuario = User::findOrFail($id);
+        return $this->showOne($user, 200);
     }
 
     /**
@@ -66,42 +64,42 @@ class UserController extends ApiController
      * @param int $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        $usuario = User::findOrFail($id);
+        //$usuario = User::findOrFail($id);
         $rules = [
-            'email' => 'email|unique:users,email,' . $usuario->id,// obtiene el id de la persona para verificar que sea diferente el email
+            'email' => 'email|unique:users,email,' . $user->id,// obtiene el id de la persona para verificar que sea diferente el email
             'password' => 'min:6|confirmed',
             'admin' => 'in:' . User::USUARIO_ADMINISTRADOR . ',' . User::USUARIO_REGULAR
         ];
         $this->validate($request, $rules);
         if ($request->has('name')) {
-            $usuario->name = $request->name;
+            $user->name = $request->name;
         }
-        if ($request->has('email') && $usuario->email != $request->email) {
-            $usuario->verified = User::USUARIO_NO_VERIFICADO;
-            $usuario->verification_token = User::generarVerificationToken();
-            $usuario->email = $request->email;
+        if ($request->has('email') && $user->email != $request->email) {
+            $user->verified = User::USUARIO_NO_VERIFICADO;
+            $user->verification_token = User::generarVerificationToken();
+            $user->email = $request->email;
         }
 
         if ($request->has('password')) {
-            $usuario->password = bcrypt($request->email);
+            $user->password = bcrypt($request->email);
         }
 
         if ($request->has('admin')) {
-            if (!$usuario->esVerificado()) {
+            if (!$user->esVerificado()) {
                 return $this->errorResponse('Unicamente los usuarios verificados pueden cambiar su valor de administrador',409);
             }
         }
 
         // verifica que la informacion sea distinta a la existente en la base de datos
-        if (!$usuario->isDirty()) {
-            return $this->errorResponse('Se debe de ingresar un dato diferente para actualizar', 422);
+        if (!$user->isDirty()) {
+            return $this->errorResponse('Se debe especificar al menos un valor diferente para actualizar', 422);
         }
 
-        $usuario->save();
+        $user->save();
 
-        return $this->showOne($usuario, 200);
+        return $this->showOne($user, 200);
 
 
     }
@@ -112,10 +110,10 @@ class UserController extends ApiController
      * @param int $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        $usuario = User::findOrFail($id);
-        $usuario->delete();
-        return response()->json(['data' => $usuario], 200);
+        //$usuario = User::findOrFail($id);
+        $user->delete();
+        return response()->json(['data' => $user], 200);
     }
 }
