@@ -56,3 +56,6 @@ Route::resource('sellers.products','Sellers\SellerProductController',['except'=>
  * Users
  */
 Route::resource('users','Users\UserController',['except'=>['create','edit']]);
+// TODO ruta fluida
+Route::name('verify')->get('users/verify/{token}','Users\UserController@verify');
+Route::name('resend')->get('users/{user}/resend','Users\UserController@resend');

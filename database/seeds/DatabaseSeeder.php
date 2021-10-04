@@ -24,6 +24,12 @@ class DatabaseSeeder extends Seeder
         Transaction::truncate();
         DB::table('category_product')->truncate();
 
+        //TODO desactivas los eventos de un modelo solamente cuando se ejecuta este metodo, para evitar el envio masivo de correos
+        User::flushEventListeners();
+        Category::flushEventListeners();
+        Product::flushEventListeners();
+        Transaction::flushEventListeners();
+
         $cantidadUsuarios=1000;
         $cantidadCategorias=30;
         $cantidadProductos=1000;

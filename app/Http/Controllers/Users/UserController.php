@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\ApiController;
+use App\Mail\UserCreated;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends ApiController
 {
@@ -115,5 +117,33 @@ class UserController extends ApiController
         //$usuario = User::findOrFail($id);
         $user->delete();
         return response()->json(['data' => $user], 200);
+    }
+
+    /**
+     * TODO metodo para verificar cuenta con token
+     * @param $token
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function verify($token){
+        $user=User::where('verification_token',$token)->firstOrFail();
+        $user->verified=User::USUARIO_VERIFICADO;
+        $user->verification_token=null;
+        $user->save();
+
+        return $this->showMessage('La cuenta ha sido verificada');
+    }
+
+    /**
+     * TODO metodo que reenvia la verificacion
+     * @param User $user
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function resend(User $user)
+    {
+        if ($user->esVerificado()){
+            return $this->errorResponse('Este usuario ya ha sido verificado.',409);
+        }
+        Mail::to($user)->send(new UserCreated($user));
+        return $this->showMessage('El correo de verificacion se ha reenviado');
     }
 }
