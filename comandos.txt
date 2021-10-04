@@ -29,3 +29,6 @@ php artisan make:mail UserCreated
 
 == markdown, permite ayudar a crear mailables personalizados html con tablas, titulos, etc
 php artisan make:mail Prueba -m emails.prueba
+
+== crear un middleware
+php artisan make:middleware SignatureMiddleware
