@@ -102,6 +102,7 @@ class SellerProductController extends ApiController
 
     /**
      * TODO metodo que valida si el vendedor es el propietario del producto
+     *
      * @param Seller $seller
      * @param Product $product
      */
