@@ -16,6 +16,8 @@ return [
     |
     */
 
+    // TODO se coloca la configuracion Supported: "smtp", "sendmail", "mailgun", "mandrill", "ses",
+    //    |            "sparkpost", "log", "array"
     'driver' => env('MAIL_DRIVER', 'smtp'),
 
     /*
@@ -54,7 +56,7 @@ return [
     | used globally for all e-mails that are sent by your application.
     |
     */
-
+    // TODO remitente global lo cual se usara como remitente cuando se envie el correo
     'from' => [
         'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
         'name' => env('MAIL_FROM_NAME', 'Example'),

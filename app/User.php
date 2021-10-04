@@ -77,7 +77,7 @@ class User extends Authenticatable
      * @return bool valida si el usuario si se ha verificado el usuario
      */
     public function esVerificado(){
-        return $this->verified==User::USUARIO_VERIFICADO;
+        return $this->verified == User::USUARIO_VERIFICADO;
     }
 
     /**

@@ -23,3 +23,9 @@ php artisan make:controller Categories/CategoryController -r -m Category
 
 == se utiliza para consumir servicios dentro de laravel
 composer require guzzlehttp/guzzle
+
+== se usa para crear un mailable para usuarios creados
+php artisan make:mail UserCreated
+
+== markdown, permite ayudar a crear mailables personalizados html con tablas, titulos, etc
+php artisan make:mail Prueba -m emails.prueba
