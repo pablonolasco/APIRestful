@@ -21,6 +21,8 @@ php artisan migrate:refresh --seed
 == se crea el controlador con los metodos de recurso y se inyecta el modelo
 php artisan make:controller Categories/CategoryController -r -m Category
 
+https://www.laraveltip.com/3-consejos-muy-importantes-de-laravel-eloquent/#Primer_consejo_Usa_el_metodo_SELECT
+
 == se utiliza para consumir servicios dentro de laravel
 composer require guzzlehttp/guzzle
 
@@ -32,3 +34,12 @@ php artisan make:mail Prueba -m emails.prueba
 
 == crear un middleware
 php artisan make:middleware SignatureMiddleware
+
+== transformaciones https://fractal.thephpleague.com/, los campos de las respuesta se pueden colocar otro nombre diferente a los campos de la db
+https://github.com/spatie/laravel-fractal
+composer require spatie/laravel-fractal:^4.0
+composer require spatie/laravel-fractal
+php artisan make:transformer UserTransformer
+
+== Ordenando y Filtrando Resultados Usando Parámetros de URL
+https://elbauldelprogramador.com/buenas-practicas-para-el-diseno-de-una-api-restful-pragmatica/#ordenaci%C3%B3n

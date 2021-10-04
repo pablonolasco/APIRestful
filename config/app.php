@@ -167,7 +167,8 @@ return [
          * Package Service Providers...
          */
         Laravel\Tinker\TinkerServiceProvider::class,
-
+        // paquete para tranformer respuestas
+        Spatie\Fractal\FractalServiceProvider::class,
         /*
          * Application Service Providers...
          */
