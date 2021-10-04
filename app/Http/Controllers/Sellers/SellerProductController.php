@@ -8,8 +8,14 @@ use App\Seller;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
+/**
+ * TODO controlador que realiza las operaciones entre seller y product
+ * Class SellerProductController
+ * @package App\Http\Controllers\Sellers
+ */
 class SellerProductController extends ApiController
 {
     /**
@@ -39,7 +45,7 @@ class SellerProductController extends ApiController
         $this->validate($request, $rules);
         $data = $request->all();
         $data['status'] = Product::PRODUCTO_NO_DISPONIBLE;
-        $data['image'] = '1.jpg';
+        $data['image'] = $request->image->store('');//TODO almacena la imagen en la ruta store, al dejar vacio laravel se encarga del nombre unico
         $data['seller_id'] = $seller->id;
         $product = Product::create($data);
 
@@ -47,6 +53,7 @@ class SellerProductController extends ApiController
     }
 
     /**
+     * TODO actualiza al producto
      * @param Request $request
      * @param Seller $seller
      * @param Product $product
@@ -65,8 +72,8 @@ class SellerProductController extends ApiController
 
         $product->fill($request->intersect([
             'name',
-            'quantity',
-            'image'
+            'description',
+            'quantity'
         ]));
 
         if ($request->has('status')) {
@@ -75,6 +82,11 @@ class SellerProductController extends ApiController
             if ($product->estaDisponible() && $product->categories()->count() == 0) {
                 return $this->errorResponse('Un producto debe al menos tener una categoria',409);
             }
+        }
+
+        if($request->hasFile('image')){
+            Storage::delete($product->image);
+            $product->image=$request->image->store('');
         }
 
         if ($product->isClean()){
@@ -95,6 +107,8 @@ class SellerProductController extends ApiController
     public function destroy(Seller $seller,Product $product)
     {
         $this->verificarVendedor($seller,$product);
+        //TODO ingresa a la ruta laravel
+        Storage::delete($product->image);
         $product->delete();
         return $this->showOne($product);
         //
